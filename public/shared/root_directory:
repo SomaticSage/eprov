@@ -1,0 +1,6 @@
+root_directory/
+│
+├── landing.html
+├── styles.css
+└── customer/
+    └── index.html
