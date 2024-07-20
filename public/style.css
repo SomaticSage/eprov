@@ -5,12 +5,11 @@ body {
     padding: 0;
     box-sizing: border-box;
     background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: red;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: blueviolet;
 }
 
 .landing-container {
@@ -35,7 +34,8 @@ body {
     color: #495057;
 }
 
-.landing-container input[type="email"] {
+.landing-container input[type="email"],
+.landing-container input[type="password"] {
     width: 100%;
     padding: 15px;
     font-size: 16px;
@@ -43,6 +43,11 @@ body {
     border: 1px solid #ced4da;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: transform 0.3s ease; /* Added transition for smooth resizing */
+}
+
+.landing-container input[type="password"]:focus {
+    transform: scale(1.2); /* Increase size on focus */
 }
 
 .go-to-site-button {
