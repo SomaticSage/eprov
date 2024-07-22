@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interested</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="interested-container">
+        <h1>Interested</h1>
+        <div id="interested-products"></div>
+        <a href="index.html" class="back-button">Back to Admin</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const interestedProductsContainer = document.getElementById('interested-products');
+            
+            const loadInterestedProducts = () => {
+                const interestedProducts = JSON.parse(localStorage.getItem('interestedProducts')) || [];
+                interestedProductsContainer.innerHTML = '';
+                if (interestedProducts.length > 0) {
+                    interestedProducts.forEach((productName, index) => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('interested-product');
+                        productElement.innerHTML = `
+                            <span>${productName}</span>
+                            <button class="delete-button" data-index="${index}">Delete</button>
+                        `;
+                        interestedProductsContainer.appendChild(productElement);
+                    });
+                } else {
+                    interestedProductsContainer.textContent = 'No products added to interested list.';
+                }
+            };
+
+            const deleteProduct = (index) => {
+                let interestedProducts = JSON.parse(localStorage.getItem('interestedProducts')) || [];
+                interestedProducts.splice(index, 1);
+                localStorage.setItem('interestedProducts', JSON.stringify(interestedProducts));
+                loadInterestedProducts();
+            };
+
+            interestedProductsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-button')) {
+                    const index = e.target.getAttribute('data-index');
+                    deleteProduct(index);
+                }
+            });
+
+            loadInterestedProducts();
+        });
+    </script>
+</body>
+</html>
